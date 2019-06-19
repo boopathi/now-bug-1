@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "now-bug-1",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@now/node",
+      "config": {
+        "includeFiles": "dist/**"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/dist/(.*)", "dest": "dist/client/$1" },
+    { "src": "/.*", "dest": "server.js" }
+  ]
+}

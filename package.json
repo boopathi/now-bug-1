@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "now-build": "node build.js"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1"
+  }
+}
