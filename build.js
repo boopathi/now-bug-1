@@ -4,7 +4,7 @@ const mkdirp = require("mkdirp");
 mkdirp.sync(__dirname + "/dist/client");
 
 fs.writeFileSync(
-  __dirname + "/dist/index.html",
+  __dirname + "/dist/client/index.html",
   `<script src="/dist/main.js"></script>`
 );
 
@@ -15,5 +15,18 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   __dirname + "/dist/server.js",
-  `module.exports = { "default": () => "Server" }`
+  `
+    const fs = require("fs");
+    const path = require("path");
+    // just require something from node_modules
+    const mkdirp = require("mkdirp");
+
+    module.exports = {
+      "default": (_, res) => {
+        const htmlFile = path.join(__dirname, "client/index.html")
+        const html = fs.readFileSync(htmlFile, "utf-8");
+        res.end(html);
+      }
+    }
+  `
 );
